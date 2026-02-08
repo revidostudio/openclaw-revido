@@ -70,6 +70,11 @@
   "browser": {
     "binding": "BROWSER",
   },
+  // Cloudflare Access configuration for admin routes
+  "vars": {
+    "CF_ACCESS_TEAM_DOMAIN": "revido.cloudflareaccess.com",
+    "CF_ACCESS_AUD": "493320800e7ffc98d5523ec4b8417d5ad7919c02c304dea41e6fa9c35d36341e",
+  },
   // Note: CF_ACCOUNT_ID should be set via `wrangler secret put CF_ACCOUNT_ID`
   // Secrets to configure via `wrangler secret put`:
   //

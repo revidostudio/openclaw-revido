@@ -280,6 +280,20 @@ if (process.env.SLACK_BOT_TOKEN && process.env.SLACK_APP_TOKEN) {
     };
 }
 
+// WhatsApp configuration (uses QR code linking via Control UI, no bot token needed)
+{
+    const dmPolicy = process.env.WHATSAPP_DM_POLICY || 'pairing';
+    config.channels.whatsapp = config.channels.whatsapp || {};
+    config.channels.whatsapp.enabled = true;
+    config.channels.whatsapp.dmPolicy = dmPolicy;
+    if (process.env.WHATSAPP_DM_ALLOW_FROM) {
+        config.channels.whatsapp.allowFrom = process.env.WHATSAPP_DM_ALLOW_FROM.split(',');
+    } else if (dmPolicy === 'open') {
+        config.channels.whatsapp.allowFrom = ['*'];
+    }
+    console.log('WhatsApp channel enabled (dmPolicy=' + dmPolicy + '). Use the Control UI to scan QR code.');
+}
+
 fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
 console.log('Configuration patched successfully');
 EOFPATCH
